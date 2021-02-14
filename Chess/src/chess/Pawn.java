@@ -4,7 +4,9 @@
 package chess;
 
 /**
- * @author
+ * @author  Ian Wong
+ * 
+ * @version 2020.2.14
  *
  */
 public class Pawn extends Piece {
@@ -144,6 +146,19 @@ public class Pawn extends Piece {
     @Override
     public Type getType() {
         return type;
+    }
+
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Pawn on ");
+        builder.append(this.square.toString());
+        return builder.toString();
+    }
+
+    @Override
+    public String getSymbol() {
+
+        return "";
     }
 
 }

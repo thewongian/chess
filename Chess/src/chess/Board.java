@@ -30,7 +30,7 @@ public class Board {
     public void addSquare(Square square) {
         int x = square.getX();
         int y = square.getY();
-        squares[x][y] = square;
+        squares[y][x] = square;
     }
 
     public Square[][] getBoard() {

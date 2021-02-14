@@ -4,15 +4,26 @@
 package chess;
 
 /**
- * @author ian
+ * Rook piece, can move in cardinal directions
+ * 
+ * @author  Ian Wong
+ * 
+ * @version 2020.2.14
  *
  */
 public class Rook extends Piece {
     private Type type;
     private boolean hasMoved;
 
-    public Rook(Player player, Square pieceSquare) {
-        super(player, pieceSquare);
+    /**
+     * 
+     * @param player
+     *                    piece's player
+     * @param pieceSquare
+     *                    square the piece will be initialized on
+     */
+    public Rook(Player player, Square square) {
+        super(player, square);
         type = Type.ROOK;
         hasMoved = false;
     }
@@ -28,10 +39,19 @@ public class Rook extends Piece {
         return false;
     }
 
+    /**
+     * @param  square
+     *                target square
+     * 
+     * @return        null if any square along the way is invalid, or an array
+     *                of squares as a path
+     */
     @Override
     public Square[] getPath(Square square) {
         int xDir = 1;
         int yDir = 1;
+
+        // if its going left or right or up or down
         if (this.square.getX() > square.getX()) {
             xDir = -1;
         }
@@ -39,27 +59,41 @@ public class Rook extends Piece {
             yDir = -1;
         }
         int arraySize = 0;
+
+        // check if the square is even a valid square
         if (isValidPath(square)) {
             arraySize = Math.abs(square.getX() - this.square.getX())
                     + Math.abs(square.getY() - this.square.getY());
         }
+        else {
+            return null;
+        }
         Square[][] board = square.getBoard().getBoard();
         Square[] squares = new Square[arraySize];
-        // if its going left or right
-        if (Math.abs(square.getX() - this.square.getX()) > 0) {
-            for (int i = 0; i < arraySize; i++) {
-                squares[i] = board[this.square.getX() + i * xDir][square
-                        .getY()];
-            }
-        }
-        // up or down
-        else {
-            for (int i = 0; i < arraySize; i++) {
-                squares[i] = board[square.getX()][this.square.getY()
-                        + i * yDir];
 
+        // left/right
+        if (arraySize > 1) {
+            if (Math.abs(square.getX() - this.square.getX()) > 0) {
+                for (int i = 0; i < arraySize - 1; i++) {
+                    squares[i] = board[square.getY()][this.square.getX() + i
+                            + 1 * xDir];
+                    if (squares[i].isOccupied()) {
+                        return null;
+                    }
+                }
+            }
+            // up/down
+            else {
+                for (int i = 0; i < arraySize - 1; i++) {
+                    squares[i] = board[this.square.getY() + i + 1 * yDir][square
+                            .getX()];
+                    if (squares[i].isOccupied()) {
+                        return null;
+                    }
+                }
             }
         }
+        squares[arraySize - 1] = square;
         if (squares.length > 0) {
             return squares;
         }
@@ -68,9 +102,57 @@ public class Rook extends Piece {
         }
     }
 
+    /**
+     * gets piece type
+     * 
+     * @return type of piece
+     */
     @Override
     public Type getType() {
         return type;
     }
 
+    /**
+     * piece description
+     * 
+     * @return piece on square
+     */
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("Rook on ");
+        builder.append(this.square.toString());
+
+        return builder.toString();
+    }
+
+    /**
+     * Can the rook castle?
+     * 
+     * @return hasMoved boolean
+     */
+    public boolean canCastle() {
+        return hasMoved;
+    }
+
+    /**
+     * sets hasMoved boolean
+     * 
+     * @param bool
+     *             boolean that we are changing hasMoved to
+     */
+    public void setHasMoved(boolean bool) {
+        hasMoved = bool;
+    }
+
+    /**
+     * algebraic notation symbol of piece
+     * 
+     * @return symbol
+     */
+    @Override
+    public String getSymbol() {
+
+        return "R";
+    }
 }

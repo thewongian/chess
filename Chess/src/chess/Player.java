@@ -4,7 +4,13 @@
 package chess;
 
 /**
- * @author ian
+ * Player class, has a color
+ * 
+ * unfinished
+ * 
+ * @author  Ian Wong
+ * 
+ * @version 2020.2.14
  *
  */
 public class Player {
@@ -25,6 +31,10 @@ public class Player {
      */
     public PlayerColor getColor() {
         return color;
+    }
+
+    public boolean isWhite() {
+        return getColor() == PlayerColor.WHITE;
     }
 
 }

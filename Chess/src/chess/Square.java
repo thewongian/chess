@@ -100,6 +100,12 @@ public class Square {
         }
     }
 
+    /**
+     * converts square to algebraic notation
+     * 
+     * @return square in algebraic notation
+     * 
+     */
     public String toString() {
         StringBuilder builder = new StringBuilder();
         String[] letters = { "a", "b", "c", "d", "e", "f", "g", "h" };

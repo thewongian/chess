@@ -4,6 +4,8 @@
 package chess;
 
 /**
+ * Knight Piece, can move in an L shape
+ * 
  * @author  Ian Wong
  * 
  * @version 2020.11.24
@@ -13,10 +15,15 @@ public class Knight extends Piece {
     private Type type;
 
     /**
+     * Constructor
      * 
+     * @param player
+     *                    piece's player
+     * @param pieceSquare
+     *                    target square
      */
-    public Knight(Player player, Square pieceSquare) {
-        super(player, pieceSquare);
+    public Knight(Player player, Square square) {
+        super(player, square);
         type = Type.KNIGHT;
     }
 
@@ -56,6 +63,9 @@ public class Knight extends Piece {
         if (isValidPath(square)) {
             squares[0] = square;
         }
+        else {
+            return null;
+        }
         if (squares.length > 0) {
             return squares;
         }
@@ -65,11 +75,35 @@ public class Knight extends Piece {
     }
 
     /**
+     * gets type of piece
+     * 
      * @return the type of piece
      */
     @Override
     public Type getType() {
         return type;
+    }
+
+    /**
+     * piece description
+     *
+     * @return "Knight on <square in chess algebraic notation>
+     * 
+     */
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Knight on ");
+        builder.append(this.square.toString());
+        return builder.toString();
+    }
+
+    /**
+     * @return Algebraic notation symbol for knight
+     */
+    @Override
+    public String getSymbol() {
+
+        return "N";
     }
 
 }

@@ -49,4 +49,14 @@ public abstract class Piece {
      */
     public abstract Type getType();
 
+    /**
+     * @return Piece on a square in string
+     */
+    public abstract String toString();
+
+    /**
+     * 
+     * @return symbol of the piece
+     */
+    public abstract String getSymbol();
 }
