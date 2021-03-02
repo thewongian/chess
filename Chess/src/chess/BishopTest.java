@@ -6,8 +6,11 @@ package chess;
 import junit.framework.TestCase;
 
 /**
- * @author Ian Wong
+ * Tests the Bishop Class
  * 
+ * @author  Ian Wong
+ * 
+ * @version 2021.2.14
  *
  */
 public class BishopTest extends TestCase {

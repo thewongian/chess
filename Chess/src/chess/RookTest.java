@@ -77,6 +77,12 @@ public class RookTest extends TestCase {
      */
     public void testGetPath() {
 
+        String boardString = board.toString();
+        String expectedBoard = "[ , , , , , , , ]\n" + "[ , , , , , , , ]\n"
+                + "[ , , , , , , , ]\n" + "[ , , , , , , , ]\n"
+                + "[b, , , , , , , ]\n" + "[ , , , , , , , ]\n"
+                + "[ , , , , , , , ]\n" + "[R,N, , , , , , ]\n";
+        assertEquals(expectedBoard, boardString);
         Square[] expectedPath = { squares[1][0], squares[2][0], squares[3][0] };
 
         Square[] path = rook.getPath(a4);
@@ -99,8 +105,12 @@ public class RookTest extends TestCase {
 
         assertEquals(1, path.length);
         assertEquals(expectedPath1[0], path[0]);
+
     }
 
+    /**
+     * tests toString
+     */
     public void testToString() {
         String expected = "Rook on a1";
         assertEquals(expected, rook.toString());
