@@ -101,6 +101,43 @@ public class Square {
     }
 
     /**
+     * @param  object
+     *                object being compared
+     * 
+     * @return        true if it has the same x and y and same piece
+     */
+    public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        }
+        else if (object == null) {
+            return false;
+        }
+        else if (object instanceof Square) {
+            Square otherSquare = (Square) object;
+            if (this.getPiece() == null) {
+                return this.getX() == otherSquare.getX()
+                        && this.getY() == otherSquare.getY()
+                        && otherSquare.getPiece() == null;
+            }
+            else if (otherSquare.getPiece() == null) {
+                return this.getX() == otherSquare.getX()
+                        && this.getY() == otherSquare.getY()
+                        && this.getPiece() == null;
+            }
+            else {
+                return this.getX() == otherSquare.getX()
+                        && this.getY() == otherSquare.getY()
+                        && this.getPiece().equals(otherSquare.getPiece());
+            }
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    /**
      * converts square to algebraic notation
      * 
      * @return square in algebraic notation

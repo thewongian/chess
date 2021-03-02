@@ -10,7 +10,7 @@ package chess;
  * 
  * @author  Ian Wong
  * 
- * @version 2020.2.14
+ * @version 2021.2.14
  *
  */
 public class Player {

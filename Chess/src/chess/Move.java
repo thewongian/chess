@@ -7,7 +7,7 @@ package chess;
  * 
  * @author  Ian Wong
  * 
- * @version 2020.2.14
+ * @version 2021.2.14
  *
  */
 public class Move {
@@ -19,6 +19,16 @@ public class Move {
     private boolean castlingMove = false;
     private boolean capture = false;
 
+    /**
+     * Constructor
+     * 
+     * @param player
+     *               player making the move
+     * @param start
+     *               the starting square
+     * @param end
+     *               ending square of the move
+     */
     public Move(Player player, Square start, Square end) {
         this.piece = start.getPiece();
         this.start = start;
@@ -26,14 +36,65 @@ public class Move {
         this.player = player;
     }
 
+    /**
+     * get piece involved in move
+     * 
+     * @return the piece involved in the move
+     */
+    public Piece getPiece() {
+        return piece;
+    }
+
+    /**
+     * get starting square
+     * 
+     * @return starting square
+     */
+    public Square getStart() {
+        return start;
+    }
+
+    /**
+     * get end square
+     * 
+     * @return end square
+     */
+    public Square getEnd() {
+        return end;
+    }
+
+    /**
+     * get player
+     * 
+     * @return player making the move
+     */
+    public Player getPlayer() {
+        return player;
+    }
+
+    /**
+     * Checks if move is a castling move
+     * 
+     * @return true if its a castling move
+     */
     public boolean isCastlingMove() {
         return castlingMove;
     }
 
+    /**
+     * Sets castling move
+     * 
+     * @param castlingMove
+     */
     public void setCastlingMove(boolean castlingMove) {
         this.castlingMove = castlingMove;
     }
 
+    /**
+     * Converts move to algebraic notation
+     * 
+     * @return move in algebraic notation
+     */
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append(piece.getSymbol());
