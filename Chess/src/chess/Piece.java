@@ -55,6 +55,29 @@ public abstract class Piece {
     public abstract String toString();
 
     /**
+     * @param  object
+     *                object being compared to
+     * 
+     * @return        true if same type of piece and same color
+     */
+    public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        }
+        else if (object == null) {
+            return false;
+        }
+        else if (object instanceof Piece) {
+            Piece otherPiece = (Piece) object;
+            return this.getType() == otherPiece.getType()
+                    && this.player.getColor() == otherPiece.player.getColor();
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
      * 
      * @return symbol of the piece
      */

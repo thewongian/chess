@@ -28,6 +28,12 @@ public class Rook extends Piece {
         hasMoved = false;
     }
 
+    /**
+     * @param  square
+     *                square being checked
+     * 
+     * @return        true if its a valid path to move to
+     */
     @Override
     public boolean isValidPath(Square square) {
         int xDiff = Math.abs(this.square.getX() - square.getX());

@@ -4,9 +4,12 @@
 package chess;
 
 /**
+ * Pawn class, can only move forward one space unless first move and can only
+ * take diagnally. Can also en passant
+ * 
  * @author  Ian Wong
  * 
- * @version 2020.2.14
+ * @version 2021.2.14
  *
  */
 public class Pawn extends Piece {
@@ -15,6 +18,14 @@ public class Pawn extends Piece {
     public boolean firstMove;
     public boolean specialMove;
 
+    /**
+     * constructor, makes a new pawn
+     * 
+     * @param player
+     *                    the player who will use this pawn
+     * @param pieceSquare
+     *                    square the piece will be placed on
+     */
     public Pawn(Player player, Square pieceSquare) {
         super(player, pieceSquare);
         type = Type.PAWN;
@@ -32,7 +43,11 @@ public class Pawn extends Piece {
     @Override
     public boolean isValidPath(Square square) {
         return (this.square.getX() == square.getX() && isAhead(square)
-                && !square.isOccupied());
+                && !square.isOccupied()) || canCapture(square);
+    }
+
+    public void setFirstMove(boolean bool) {
+        firstMove = bool;
     }
 
     /**
@@ -41,12 +56,13 @@ public class Pawn extends Piece {
      * @param  square
      *                square being checked
      * 
-     * @return
+     * @return        true if there is a piece diagonal
      */
     public boolean canCapture(Square square) {
 
         int xGap = Math.abs(this.square.getX() - square.getX());
-        if (square.isOccupied() && xGap == 1 && isAhead(square)) {
+        if (square.isOccupied() && xGap == 1 && isAhead(square)
+                && square.canMoveTo(this)) {
             return true;
         }
 
@@ -56,6 +72,14 @@ public class Pawn extends Piece {
 
     }
 
+    /**
+     * gets path to a square
+     * 
+     * @param  square
+     *                square being checked
+     * 
+     * @return        an array of squares the piece can move to
+     */
     @Override
     public Square[] getPath(Square square) {
         Square[] squares = null;
@@ -63,11 +87,11 @@ public class Pawn extends Piece {
             squares = new Square[1];
             if (specialMove) {
                 if (square.getY() == 4) {
-                    squares[0] = square.getBoard().getBoard()[square.getX()][5];
+                    squares[0] = square.getBoard().getBoard()[5][square.getX()];
                 }
 
                 else {
-                    squares[0] = square.getBoard().getBoard()[square.getX()][2];
+                    squares[0] = square.getBoard().getBoard()[2][square.getX()];
                 }
                 specialMove = false;
             }
@@ -88,14 +112,28 @@ public class Pawn extends Piece {
      */
     private boolean isAhead(Square square) {
         PlayerColor color = player.getColor();
-
-        switch (color) {
-        case WHITE:
-            return square.getY() - this.square.getY() == 1;
-        case BLACK:
-            return this.square.getY() - square.getY() == 1;
-        default:
+        if (square == this.square) {
             return false;
+        }
+        if (firstMove) {
+            switch (color) {
+            case WHITE:
+                return square.getY() - this.square.getY() <= 2;
+            case BLACK:
+                return this.square.getY() - square.getY() <= 2;
+            default:
+                return false;
+            }
+        }
+        else {
+            switch (color) {
+            case WHITE:
+                return square.getY() - this.square.getY() == 1;
+            case BLACK:
+                return this.square.getY() - square.getY() == 1;
+            default:
+                return false;
+            }
         }
     }
 
@@ -112,12 +150,12 @@ public class Pawn extends Piece {
         switch (color) {
         case WHITE:
             if (this.square.getY() == 4) {
-                adjacentPawnMove(square);
+                return adjacentPawnMove(square);
             }
 
         case BLACK:
             if (square.getY() == 3) {
-                adjacentPawnMove(square);
+                return adjacentPawnMove(square);
             }
 
         default:
@@ -127,6 +165,27 @@ public class Pawn extends Piece {
     }
 
     /**
+     * 
+     * @return true if pawn is eligible for promotion
+     */
+    public boolean promotion() {
+        PlayerColor color = player.getColor();
+        switch (color) {
+        case WHITE:
+            return this.square.getY() == 7;
+        case BLACK:
+            return this.square.getY() == 0;
+        default:
+            return false;
+        }
+    }
+
+    /**
+     * 
+     * @param  square
+     *                square being checked
+     * 
+     * @return        true if a pawn has moved next to it
      * 
      */
     private boolean adjacentPawnMove(Square square) {
@@ -143,11 +202,17 @@ public class Pawn extends Piece {
 
     }
 
+    /**
+     * @return type of piece
+     */
     @Override
     public Type getType() {
         return type;
     }
 
+    /**
+     * @return description of the piece and square
+     */
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Pawn on ");
@@ -155,6 +220,9 @@ public class Pawn extends Piece {
         return builder.toString();
     }
 
+    /**
+     * @return Symbol of pawn
+     */
     @Override
     public String getSymbol() {
 
