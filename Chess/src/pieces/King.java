@@ -1,7 +1,10 @@
 /**
  * 
  */
-package chess;
+package pieces;
+
+import board.Square;
+import chess.Player;
 
 /**
  * King piece, can move one unit in any direction

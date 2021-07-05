@@ -1,7 +1,11 @@
 /**
  * 
  */
-package chess;
+package pieces;
+
+import board.Square;
+import chess.Player;
+import chess.PlayerColor;
 
 /**
  * Pawn class, can only move forward one space unless first move and can only
@@ -111,7 +115,7 @@ public class Pawn extends Piece {
      * @return
      */
     private boolean isAhead(Square square) {
-        PlayerColor color = player.getColor();
+        PlayerColor color = getPlayer().getColor();
         if (square == this.square) {
             return false;
         }
@@ -145,7 +149,7 @@ public class Pawn extends Piece {
      * @return
      */
     private boolean enPassant(Square square) {
-        PlayerColor color = player.getColor();
+        PlayerColor color = getPlayer().getColor();
 
         switch (color) {
         case WHITE:
@@ -169,7 +173,7 @@ public class Pawn extends Piece {
      * @return true if pawn is eligible for promotion
      */
     public boolean promotion() {
-        PlayerColor color = player.getColor();
+        PlayerColor color = getPlayer().getColor();
         switch (color) {
         case WHITE:
             return this.square.getY() == 7;

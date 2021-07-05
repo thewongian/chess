@@ -1,7 +1,10 @@
 /**
  * 
  */
-package chess;
+package pieces;
+
+import board.Square;
+import chess.Player;
 
 /**
  * Rook piece, can move in cardinal directions

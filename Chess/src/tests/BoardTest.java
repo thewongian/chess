@@ -1,9 +1,14 @@
 /**
  * 
  */
-package chess;
+package tests;
 
+import board.Board;
+import board.Square;
+import chess.Player;
+import chess.PlayerColor;
 import junit.framework.TestCase;
+import pieces.Bishop;
 
 /**
  * Tests the board class

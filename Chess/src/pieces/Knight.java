@@ -1,7 +1,10 @@
 /**
  * 
  */
-package chess;
+package pieces;
+
+import board.Square;
+import chess.Player;
 
 /**
  * Knight Piece, can move in an L shape

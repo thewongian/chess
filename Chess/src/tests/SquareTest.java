@@ -1,5 +1,7 @@
-package chess;
+package tests;
 
+import board.Board;
+import board.Square;
 import junit.framework.TestCase;
 
 public class SquareTest extends TestCase {

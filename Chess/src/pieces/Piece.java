@@ -1,7 +1,10 @@
 /**
  * 
  */
-package chess;
+package pieces;
+
+import board.Square;
+import chess.Player;
 
 /**
  * A Chess Piece Handles the type of piece and where it can move
@@ -14,12 +17,12 @@ package chess;
 public abstract class Piece {
 
     protected Square square;
-    protected Player player;
+    private Player player;
 
     public Piece(Player player, Square pieceSquare) {
         square = pieceSquare;
         square.setPiece(this);
-        this.player = player;
+        this.setPlayer(player);
 
     }
 
@@ -70,7 +73,7 @@ public abstract class Piece {
         else if (object instanceof Piece) {
             Piece otherPiece = (Piece) object;
             return this.getType() == otherPiece.getType()
-                    && this.player.getColor() == otherPiece.player.getColor();
+                    && this.getPlayer().getColor() == otherPiece.getPlayer().getColor();
         }
         else {
             return false;
@@ -82,4 +85,12 @@ public abstract class Piece {
      * @return symbol of the piece
      */
     public abstract String getSymbol();
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }

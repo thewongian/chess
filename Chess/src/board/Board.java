@@ -1,4 +1,13 @@
-package chess;
+package board;
+
+import chess.Player;
+import pieces.Bishop;
+import pieces.King;
+import pieces.Knight;
+import pieces.Pawn;
+import pieces.Queen;
+import pieces.Rook;
+import pieces.Type;
 
 /**
  * Represents a chess board
@@ -137,7 +146,7 @@ public class Board {
                 }
                 else {
                     Type pieceType = squares[i][j].getPiece().getType();
-                    if (squares[i][j].getPiece().player.isWhite()) {
+                    if (squares[i][j].getPiece().getPlayer().isWhite()) {
                         switch (pieceType) {
 
                         case PAWN:

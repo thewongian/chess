@@ -1,7 +1,9 @@
 /**
  * 
  */
-package chess;
+package board;
+
+import pieces.Piece;
 
 /**
  * A square of the chess board
@@ -93,7 +95,7 @@ public class Square {
      */
     public boolean canMoveTo(Piece piece) {
         if (isOccupied()) {
-            return (getPiece().player.getColor() != piece.player.getColor());
+            return (getPiece().getPlayer().getColor() != piece.getPlayer().getColor());
         }
         else {
             return true;

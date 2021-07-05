@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import board.Board;
+import board.Move;
+
 /**
  * Class that keeps track of the game itself
  * 

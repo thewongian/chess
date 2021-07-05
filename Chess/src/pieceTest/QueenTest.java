@@ -1,9 +1,18 @@
 /**
  * 
  */
-package chess;
+package pieceTest;
 
+import board.Board;
+import board.Square;
+import chess.Player;
+import chess.PlayerColor;
 import junit.framework.TestCase;
+import pieces.Bishop;
+import pieces.Knight;
+import pieces.Pawn;
+import pieces.Queen;
+import pieces.Type;
 
 /**
  * Tests the Queen Class

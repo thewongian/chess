@@ -1,7 +1,7 @@
 /**
  * 
  */
-package chess;
+package pieces;
 
 /**
  * The type of chess piece

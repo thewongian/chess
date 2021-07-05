@@ -1,4 +1,7 @@
-package chess;
+package board;
+
+import chess.Player;
+import pieces.Piece;
 
 /**
  * A chess move
